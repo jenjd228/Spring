@@ -23,8 +23,10 @@
 <div id="registration_form">
     <form id="registration_form2" method="post" th:action="@{/register/auth}" th:object="${registrationForm}">
         <input class="registration_item" type="text" placeholder="enter username" th:field="*{username}">
+        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</p>
         <br>
         <input class="registration_item" type="password" placeholder="password" th:field="*{password}">
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
         <br>
         <input class="registration_item" type="submit" value="registration">
     </form>

@@ -1,33 +1,29 @@
 package org.example.web.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.example.web.MyPatterns.OnlyLetters;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginForm {
 
+    @NotNull
+    @NotEmpty(message = "Must be not empty")
+    @Size(min = 2, max = 50,message = "Must be between 2 and 50")
+    @OnlyLetters
     private String username;
+
+    @NotNull
+    @NotEmpty(message = "Must be not empty")
+    @Size(min = 6, max = 20,message = "Must be between 6 and 20")
     private String password;
-
-    public LoginForm(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public LoginForm() {
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {

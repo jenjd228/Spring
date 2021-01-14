@@ -1,42 +1,30 @@
 package org.example.web.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
+
     private Integer id;
+
+    @NotNull
+    @Size(min = 2, max = 30,message = "Must be between 2 and 30")
     private String author;
+
+    @NotNull
+    @Size(min = 2, max = 30,message = "Must be between 2 and 20")
     private String title;
+
+    @NotNull(message = "Must be not null")
+    @Min(value = 1,message = "Must be greater than or equal to 1")
+    @Max(value = 9999,message = "Must be less than or equal to 1")
     private Integer size;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
 
     @Override
     public String toString() {

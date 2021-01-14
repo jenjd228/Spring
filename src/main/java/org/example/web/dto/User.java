@@ -3,8 +3,6 @@ package org.example.web.dto;
 import lombok.*;
 
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

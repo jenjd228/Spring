@@ -2,16 +2,24 @@ package org.example.web.controllers;
 
 import org.apache.log4j.Logger;
 import org.example.app.services.BookService;
+import org.example.web.MyPatterns.OnlyLetters;
 import org.example.web.dto.Book;
 import org.example.web.dto.RegexForm;
+import org.hibernate.validator.constraints.pl.NIP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Controller
@@ -35,14 +43,17 @@ public class BookShelfController {
     }
 
     @PostMapping("/save")
-    public String saveBook(Book book) {
+    public String saveBook(@Valid Book book, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "book_shelf";
+        }
         bookService.saveBook(book);
         logger.info("current repository size: " + bookService.getAllBooks().size());
         return "redirect:/books/shelf";
     }
 
     @PostMapping("/remove")
-    public String removeBook(@RequestParam(value = "bookIdToRemove") Integer bookIdToRemove) {
+    public String removeBook(@RequestParam(value = "bookIdToRemove") @Valid @NotNull(message = "Must be not null") @Size(min = 1,max = 32) Integer bookIdToRemove) {
             bookService.removeBookById(bookIdToRemove);
             return "redirect:/books/shelf";
     }
