@@ -1,0 +1,33 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        #registration_form {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .registration_item {
+            margin-bottom: 10px;
+        }
+
+        #registration_form2 {
+            border: black 1px;
+        }
+    </style>
+</head>
+<body>
+<div id="registration_form">
+    <form id="registration_form2" method="post" th:action="@{/register/auth}" th:object="${registrationForm}">
+        <input class="registration_item" type="text" placeholder="enter username" th:field="*{username}">
+        <br>
+        <input class="registration_item" type="password" placeholder="password" th:field="*{password}">
+        <br>
+        <input class="registration_item" type="submit" value="registration">
+    </form>
+</div>
+</body>
+</html>
