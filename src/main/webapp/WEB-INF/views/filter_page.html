@@ -34,8 +34,9 @@
 </head>
 <body>
 <div id="regex_form">
-    <form method="get" th:action="@{/books/filter/getBooks}">
-        <input class="regex_item" type="text" placeholder="enter book filter" th:name="filter">
+    <form method="get" th:action="@{/books/filter/getBooks}" th:object="${filterDTO}">
+        <input class="regex_item" type="text" placeholder="enter book filter" th:field="*{regex}">
+        <p th:if="${#fields.hasErrors('regex')}" th:errors="*{regex}">Regex Error</p>
         <input class="regex_item" type="submit" value="filter">
     </form>
 

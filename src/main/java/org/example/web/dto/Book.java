@@ -13,11 +13,11 @@ public class Book {
 
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "Must be not null")
     @Size(min = 2, max = 30,message = "Must be between 2 and 30")
     private String author;
 
-    @NotNull
+    @NotNull(message = "Must be not null")
     @Size(min = 2, max = 30,message = "Must be between 2 and 20")
     private String title;
 
