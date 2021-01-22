@@ -21,6 +21,8 @@ public class DefaultService {
         }
         logger.info("33   " + path.exists());
         try {
+            File file1 = new File("upload\\"+file.getOriginalFilename());
+            file1.createNewFile();
             file.transferTo(path);
         } catch (IOException e) {
             e.printStackTrace();
