@@ -18,6 +18,7 @@ import javax.validation.Valid;
 public class LoginController {
 
     private final Logger logger = Logger.getLogger(LoginController.class);
+
     private final LoginService loginService;
 
     @Autowired

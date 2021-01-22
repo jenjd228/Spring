@@ -2,6 +2,7 @@ package org.example.web.controllers;
 
 import org.apache.log4j.Logger;
 import org.example.app.services.BookService;
+import org.example.app.services.DefaultService;
 import org.example.web.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +24,14 @@ public class BookShelfController {
 
     private final BookService bookService;
 
+    private final DefaultService defaultService;
+
     private final HashMap<String,Object> allModelFieldsAttributeBookShelf;
 
     private final HashMap<String,Object> allModelFieldsAttributeFilter;
 
-    public BookShelfController(HashMap<String,Object> allModelFieldsAttributeFilter,HashMap<String,Object> allModelFieldsAttributeBookShelf,BookService bookService) {
+    public BookShelfController(DefaultService defaultService, HashMap<String,Object> allModelFieldsAttributeFilter, HashMap<String,Object> allModelFieldsAttributeBookShelf, BookService bookService) {
+        this.defaultService = defaultService;
         this.allModelFieldsAttributeFilter = allModelFieldsAttributeFilter;
         this.allModelFieldsAttributeBookShelf = allModelFieldsAttributeBookShelf;
         this.bookService = bookService;
@@ -102,7 +106,9 @@ public class BookShelfController {
         logger.info("/upload "+file);
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute("fileMessage","Must be not null");
+            return "redirect:/books/shelf";
         }
+        defaultService.fileUpload(file);
         return "redirect:/books/shelf";
     }
 
